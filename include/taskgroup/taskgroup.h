@@ -103,7 +103,7 @@ public:
         completionHandler, m_timer);
   }
 
-  void sendSignal(boost::asio::cancellation_type cancellationType) {
+  void sendSignal(boost::asio::cancellation_type cancellationType)  {
     std::lock_guard ls(m_mutex);
     for (auto &f : m_cancellationSignal) {
       f.emit(cancellationType);
