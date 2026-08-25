@@ -14,6 +14,9 @@ target_sources(
     FILES ${CMAKE_CURRENT_LIST_DIR}/include/taskgroup/taskgroup.h
 )
 
+find_package(boost_beast CONFIG REQUIRED)
+find_package(OpenSSL REQUIRED)
+
 target_link_libraries(TaskGroup INTERFACE Boost::beast OpenSSL::SSL OpenSSL::Crypto)
 
 install(TARGETS TaskGroup
