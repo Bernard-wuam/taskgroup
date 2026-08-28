@@ -79,7 +79,7 @@ public:
           if (!schedule) {
             self.reset_cancellation_state(
                 boost::asio::enable_total_cancellation());
-            schedule = false;
+           // schedule = false;
           }
 
           if (self.cancelled() != boost::asio::cancellation_type::none &&
@@ -91,6 +91,7 @@ public:
           {
             std::lock_guard lg(m_mutex);
             if (!m_cancellationSignal.empty() && !ec) {
+              schedule = true;
               return m_timer.async_wait(std::move(self));
             }
           }
