@@ -79,10 +79,10 @@ public:
           if (!schedule) {
             self.reset_cancellation_state(
                 boost::asio::enable_total_cancellation());
-           // schedule = false;
+            // schedule = false;
           }
 
-          if (self.cancelled() != boost::asio::cancellation_type::none &&
+          if (self.cancelled() == boost::asio::cancellation_type::none &&
               ec == boost::asio::error::operation_aborted) {
 
             ec = {};
@@ -104,7 +104,7 @@ public:
         completionHandler, m_timer);
   }
 
-  void sendSignal(boost::asio::cancellation_type cancellationType)  {
+  void sendSignal(boost::asio::cancellation_type cancellationType) {
     std::lock_guard ls(m_mutex);
     for (auto &f : m_cancellationSignal) {
       f.emit(cancellationType);
